@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+	<link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="reg-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-6">
+                <div class="">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">2FA CODE RECEIVED</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <span class="input">
+                                    <input class="input__field" type="text" name="TwoFactor" id="input-7">
+                                    <label class="input__label" for="input-7">
+                                        <span class="input__label-content" data-content="E-MAIL">CODE</span>
+                                    </label>
+                                </span>
+                                <button type="submit" class="btn btn-reg">Verify</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

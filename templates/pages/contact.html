@@ -1,0 +1,96 @@
+﻿{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <!-- /. End of Navigation -->
+    <div class="page_header" data-parallax-bg-image="{% static 'assets/img/1920x650-6.jpg' %}" data-parallax-direction="">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="haeder-text">
+                            <h1>Contact Us</h1>
+                            <p>You can visit our office, send us a mail or call us on phone</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  /.End of page header -->
+    <div class="contact_content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-5 p_r_40">
+                            <h1 class="contact_title">Contact Us</h1>
+                            <div class="contacts_info">
+                                <div class="address">
+                                    <p>#130, Old Street London</p>
+                                </div>
+                                <div class="phone_fax">
+                                    <div>
+                                        <p>Phone</p>
+                                        <p>Fax</p>
+                                    </div>
+                                    <div>
+                                        <a href="#">+123456789</a>
+                                        <a href="#">+123456789</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-7 p_l_40">
+                            <!-- <div class="map_widget"> -->
+                                <!-- The element that will contain our Google Map. This is used in both the Javascript and CSS above. -->
+                                <!-- <div id="map"></div> -->
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.5086593578567!2d7.033438614626902!3d5.491202335825123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104259bb08c1785b%3A0xc5bbd1b12ded682f!2s30+Wetheral+Rd%2C+460242%2C+Owerri!5e0!3m2!1sen!2sng!4v1555092665035!5m2!1sen!2sng" width="650" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact_form" method="post">
+                        {% csrf_token %}
+
+                        <h1 class="contact_title">By email</h1>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="FirstName" required>
+                                    <p class="help-block">First Name</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="LastName" required>
+                                    <p class="help-block">Last Name</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Email*</label>
+                                    <input type="email" class="form-control" id="Email" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Phone</label>
+                                    <input type="text" class="form-control" id="Phone" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Message*</label>
+                            <textarea class="form-control" rows="7" id="Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default">Get In Touch</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.End of page content -->
+{% endblock %}

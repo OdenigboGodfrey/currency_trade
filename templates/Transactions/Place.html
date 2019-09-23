@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+	<link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="buySell_content">
+    <div class="haeder-text" style="text-align:center; padding-bottom: 50px;"><h1>POST A TRADE</h1></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-md-offset-2">
+                <div class="form-content">
+                    <form class="form-horizontal" action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Base Currency</label>
+                            <div class="col-sm-8">
+                                <select class="selectpicker" data-width="100%" name="FromCurrency" id="fromcurrency" required>
+                                    {% for Currency in Currencies %}
+                                        <option value="{{ Currency.Cur }}" {% if FromSelectedItem and FromSelectedItem ==  Currency.Cur %} selected {% endif %}>
+                                            {{ Currency.Name }}({{ Currency.Cur }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Needed Currency</label>
+                            <div class="col-sm-8">
+                                <select class="selectpicker" data-width="100%" name="ToCurrency" id="tocurrency" required>
+                                    {% for Currency in Currencies %}
+                                        <option value="{{ Currency.Cur }}" {% if ToSelectedItem and ToSelectedItem ==  Currency.Cur %} selected {% endif %}>
+                                            {{ Currency.Name }}({{ Currency.Cur }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Amount</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control input-solid" id="Amount"  name="Amount" autocomplete="off" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Exchange Rate</label>
+                            <div class="col-sm-8">
+                                <input type="text"  class="form-control input-solid"  name="ExchangeRate" id="ExchangeRate" value="{{ Rate }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">To Be Received (-{{CTFee}}% charge)</label>
+                            <div class="col-sm-8">
+                                <input disabled  placeholder="$5000" type="text" class="form-control input-solid" id="s_amount">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label class="col-sm-4 control-label">Selling In Bits?</label>
+                                <label style="padding-left: 10px;" class="form-check-label" for="SellOnceYes">Yes</label>
+                                <input type="radio" class="form-check-input"  name="SellOnce" id="SellOnceYes" value="False">
+                                <label style="padding-left: 10px;" class="form-check-label" for="SellOnceNo">No</label>
+                                <input type="radio" class="form-check-input" name="SellOnce" id="SellOnceNo" value="True" checked>
+                        </div>
+
+                        <div class="form-group" id="BitPercentageHolder" style="display:none">
+                            <label class="col-sm-4 control-label">%/bit</label>
+                            <div class="col-sm-8">
+                                <input class="form-control input-solid" type="number" name="BitPercentage" value="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Negotiable?</label>
+                            <label style="padding-left: 10px;" class="form-check-label" for="negyes">Yes</label>
+                            <input type="radio" class="form-check-input" name="Negotiable" value=True id="negyes">
+                            <label style="padding-left: 10px;" class="form-check-label" for="negno">No</label>
+                            <input type="radio" class="form-check-input" id="negno" name="Negotiable" value=False checked>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <h3 class="form-title">Bank to receive funds to:</h3>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Select bank</label>
+                            <div class="col-sm-8">
+                                <select class="selectpicker" data-width="100%" name="Bank" required>
+                                    {% for Bank in BankObject %}
+                                        <option value="{{ Bank.pk }}">{{ Bank.BankName }}({{ Bank.AccountNumber }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="Payout" id="Payout" value="-1">
+                        <input type="hidden" name="Fee" id="Fee" value="-1">
+                        <input type="hidden" name="CTFee" id="CTFee" value="{{ CTFee }}">
+
+                        <div class="form-group" id="Post">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-default mr-10">Place</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block ExtraScripts %}
+<script src="/static/assets/js/scripts.js">
+
+</script>
+<Script>
+    var fromcurrency = document.getElementById('fromcurrency')
+    var tocurrency = document.getElementById('tocurrency')
+    var Amount = document.getElementById('Amount')
+
+    var SellOnceYes = document.getElementById('SellOnceYes')
+    var SellOnceNo = document.getElementById('SellOnceNo')
+    var ExRate = document.getElementById('ExchangeRate')
+    var BPHolder = document.getElementById('BitPercentageHolder')
+    var PostButton = document.getElementById('Post')
+    var PayoutInput = document.getElementById('Payout')
+    var FeeInput = document.getElementById('Fee')
+    var s_amount = document.getElementById('s_amount')
+    var AccountType = {{ AccountType }}
+    var BusinessAccount = {{ BusinessAccount.val }}
+    var MaxAmount = {{ MaxAmount }}
+    var BusinessCurrencies = ["USD", "EUR", "GBP"]
+
+    tocurrency.onchange = function()
+    {
+         SelectChanged ()
+    }
+
+    fromcurrency.onchange = function()
+    {
+         SelectChanged ()
+    }
+
+    function SelectChanged ()
+    {
+        window.location.href = location.protocol + '//' + location.host + location.pathname + "?from=" + fromcurrency.options[fromcurrency.selectedIndex].value + "&to=" + tocurrency.options[tocurrency.selectedIndex].value
+    }
+
+    Amount.onkeyup = function()
+    {
+        //AmountKeyUpConvert()
+
+        if (Amount.value >= MaxAmount)
+        {
+            if (BusinessCurrencies.indexOf(fromcurrency.options[fromcurrency.selectedIndex].value) != -1)
+            {
+                if (AccountType == BusinessAccount)
+                {
+                    AmountKeyUpConvert()
+                    PostButton.style.display = 'block'
+                }
+                else
+                {
+                    alert('Amount too high for your account type.')
+                    PostButton.style.display = 'none'
+                }
+            }
+            else
+            {
+                AmountKeyUpConvert()
+                PostButton.style.display = 'block'
+            }
+
+        }
+        else
+        {
+            AmountKeyUpConvert()
+            PostButton.style.display = 'block'
+        }
+
+    }
+
+    ExRate.onkeyup = function()
+    {
+        AmountKeyUpConvert()
+    }
+
+    function AmountKeyUpConvert()
+    {
+        //exchange rate value
+        var ExchangeAmount = (Amount.value * ExchangeRate.value)
+        // fee value
+        var Fee = Math.ceil(eval((parseFloat({{ CTFee }})/100) * Amount.value))
+
+        // if amount is > maxamount and the account is business and the currency is in the BusinessCurrencies array then the fee is 150 usd
+        if (Amount.value >= MaxAmount)
+        {
+            if (BusinessCurrencies.indexOf(fromcurrency.options[fromcurrency.selectedIndex].value) != -1)
+            {
+                if (AccountType == BusinessAccount)
+                {
+                    var Fee = 150
+                }
+            }
+        }
+
+        //payout is the amount to be paid to the user after the calculation
+        var Payout = ((Amount.value - Fee) * ExchangeRate.value)
+        //outpay is the amount that would be paid by the user if they want exactly the amount the place e.g if i want 1000 and fee is 30, ill outpay 1000 + 30
+        var OutPay = parseInt(Amount.value) + Fee
+
+        PayoutInput.value = Payout
+        FeeInput.value = Fee
+        //s_amount is use to show the payout information
+        s_amount.value = Payout + ""+ tocurrency.options[tocurrency.selectedIndex].value
+
+        <!--ValueInToCur.innerText = Amount.value + " " + fromcurrency.options[fromcurrency.selectedIndex].text + " to " + tocurrency.options[tocurrency.selectedIndex].text + " is " + ExchangeAmount-->
+        <!--ValueInToCur.innerText += "\n CT Fee is currently {{ CTFee }}%"-->
+        <!--ValueInToCur.innerText += "\n Fee: " + Fee + " " + fromcurrency.options[fromcurrency.selectedIndex].value-->
+        <!--ValueInToCur.innerText += "\n Payout: " + Math.round(Payout).toFixed(2) + " " + tocurrency.options[tocurrency.selectedIndex].value + " or while paying pay " + OutPay + fromcurrency.options[fromcurrency.selectedIndex].value-->
+
+        //used for validation
+         if (Payout < Fee)
+         {
+            PostButton.style.display = 'none'
+            ValueInToCur.innerText += "\n Payout is less than Fee, please input a higher amount."
+            s_amount.value = 0
+         }
+         else
+         {
+            PostButton.style.display = 'block'
+
+         }
+    }
+
+    SellOnceYes.onchange = function()
+    {
+        BPHolder.style.display = "block"
+    }
+
+    SellOnceNo.onchange = function()
+    {
+        BPHolder.style.display = "none"
+    }
+</Script>
+{% endblock%}

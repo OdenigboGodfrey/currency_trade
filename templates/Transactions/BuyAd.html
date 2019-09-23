@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+    <link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="buySell_content">
+    <div class="haeder-text" style="text-align:center; padding-bottom: 50px;"><h1>BUY</h1></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8">
+                <table class="table table-striped table-hover nowrap">
+                    <thead>
+                        <tr>
+                            <th>Account Number</th>
+                            <th>Amount</th>
+                            <th>Exchange Rate</th>
+                            <th>Base Currency</th>
+                            <th>Exchange to</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="logo-name">
+                                    <div class="item-logo">
+                                        <img src="assets/img/coin-logo/dollar.svg" class="img-responsive" alt="">
+                                    </div>
+                                    <span class="item_name_value">{{ TransactionObject.Seller.AccountNumber }}</span>
+                                </div>
+                            </td>
+                            <td><span class="value_ticker">{{ TransactionObject.Amount }}</span></td>
+                            <td><span class="value_price">{{ TransactionObject.ExchangeRate }}</span></td>
+                            <td><span class="value_cap">{{ TransactionObject.FromCurrency }}</span></td>
+                            <td><span class="value_max_quantity">{{ TransactionObject.ToCurrency }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-content">
+                    <form class="form-horizontal" action="" method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Purchase this Ad</label>
+                            <label style="padding-left: 10px;" class="form-check-label" for="yes">Yes</label>
+                            <input type="radio" class="form-check-input" id="yes"  name="Buy" value="True" checked>
+                            <label style="padding-left: 10px;" class="form-check-label" for="no">No</label>
+                            <input type="radio" class="form-check-input" id="no" name="Buy" value="False">
+                        </div>
+
+                        <!--<div class="row">-->
+                            <!--<div class="col-sm-offset-4 col-sm-8">-->
+                                <!--<h3 class="form-title">Message</h3>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Select Message</label>
+                            <div class="col-sm-8">
+                                <select class="selectpicker" data-width="100%" name="Message">
+                                    {% for Message in Messages %}
+                                        <option value="{{ Message }}">{{ Message }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        {% if TransactionObject.Negotiable %}
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Proposed Rate</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control input-solid" id="ProposedRate"  name="ProposedRate" value="{{ TransactionObject.ExchangeRate }}" autocomplete="off">
+                                </div>
+                            </div>
+                        {% endif%}
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                To Be Received (-
+                                {{ Fee }}
+                                charge)
+                            </label>
+                            <div class="col-sm-8">
+                                <input readonly  placeholder="$5000" type="text" class="form-control input-solid" id="s_amount">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Select bank</label>
+                            <div class="col-sm-8">
+                                <select class="selectpicker" data-width="100%" name="Bank" required>
+                                    {% for Bank in BankObject %}
+                                        <option value="{{ Bank.pk }}">{{ Bank.BankName }}({{ Bank.AccountNumber }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-default mr-10">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block ExtraScripts %}
+    <Script>
+        var Amount = {{ TransactionObject.Amount }};
+        var Fee = {{TransactionObject.CTFee}};
+        var AccountType = {{ AccountType }};
+        var BusinessAccount = {{ BusinessAccount.val }};
+        var MaxAmount = {{ MaxAmount }};
+        var BusinessFee = {{ BusinessFee }};
+        var BusinessCurrencies = ["USD", "EUR", "GBP"];
+        var ExchangeRate = {{ TransactionObject.ExchangeRate }};
+
+
+        var s_amount = document.getElementById('s_amount');
+
+        var Payout = Amount - ((Fee/100) * Amount);
+
+        window.onload = function()
+        {
+            if (Amount >= MaxAmount && AccountType == BusinessAccount)
+            {
+                Fee = BusinessFee;
+                Payout = Amount - Fee;
+            }
+
+            s_amount.value = Payout + "{{ TransactionObject.FromCurrency }}";
+        }
+
+        function ExchangeCalculator(ExRate, Amount, Fee)
+        {
+            //to-from converter
+            //converts from ToCurrency - FromCurrency
+
+            var ActualAmount = Amount - Fee;
+            var AmountInOfferCurrency = ActualAmount *  ExRate;
+            var Payout =  ActualAmount / ExRate;
+
+            return Payout;
+        }
+
+        {% if TransactionObject.Negotiable %}
+            var ProposedRate = document.getElementById('ProposedRate');
+            ProposedRate.oninput = function()
+            {
+                s_amount.value = ExchangeCalculator(ProposedRate.value, Amount, Fee) + "{{ TransactionObject.FromCurrency }}";
+            }
+        {% endif %}
+    </Script>
+{% endblock%}

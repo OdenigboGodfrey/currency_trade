@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+	<link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="reg-wrapper" style="height:640px">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-6">
+                <div class="">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab"></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+                            {% if Status %}
+                                <table class="table table-hover nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Full Name</td>
+                                            <td>{{ FullName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{{ Email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sex</td>
+                                            <td>{{ Sex }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Country</td>
+                                            <td>{{ Country }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>State</td>
+                                            <td>{{ State }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone Number</td>
+                                            <td>{{ PhoneNo }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>DOB</td>
+                                            <td>{{ DOB }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CT Account Number</td>
+                                            <td>{{ AccountNumber }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <div>User Info not found.</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

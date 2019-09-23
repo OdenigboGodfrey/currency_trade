@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Admin Portal</title>
+  {% load static %}
+  <link rel="shortcut icon" href="{% static 'CTAdmin/img/favicon/favicon-32x32.png' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'CTAdmin/img/favicon/favicon-16x16.png' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'CTAdmin/img/favicon/apple-touch-icon.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'CTAdmin/css/bootstrap.min.css' %}" />
+  <link href="{% static 'CTAdmin/font/ionicons/css/ionicons.min.css' %}" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'CTAdmin/css/main.min.css' %}" />
+</head>
+
+
+<body>
+  <div class="wrapper">
+    <!-- HEADER -->
+    <header class="tm-header tm-shadow-btm">
+      <nav class="navbar justify-content-between justify-content-sm-start">
+        <div class="d-none d-sm-block d-md-none tm-semi-close-nav" id="tm-semi-close-nav">
+          <i class="icon ion-ios-arrow-round-back tm-f4 text-white"></i>
+        </div>
+        <a class="navbar-brand" href="{url 'CTAdmin:index'}">CT</a>
+        <button type="button" class="btn btn-primary navbar-toggler border-0 d-sm-none ml-4" data-toggle="collapse"
+          data-target="#sidebarNav" aria-expanded="false" aria-controls="sidebarNav" aria-label="Toggle sidebar nav">
+          <i class="icon ion-ios-menu tm-f4"></i>
+        </button>
+      </nav>
+    </header>
+    <div class="container-fluid tm-main-con">
+		<div class="flex-sm-nowrap">
+			<main class="px-3 tm-content">
+				{% block content %}
+				{% endblock %}
+			</main>
+			<!-- FOOTER -->
+			<div class="tm-footer tm-shadow bg-white text-center clearfix">
+			  <div class="offset-sm-4 offset-md-3 offset-xl-2">
+				&copy; Copyright 2018
+			  </div>
+			</div>
+			{% if ErrorMessage %}
+				<div class="modal fade" id="modalDone" tabindex="-1" role="dialog" aria-labelledby="modalDone" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <div class="modal-header p-2">
+						<!-- <h5 class="modal-title text-center">Appointment Request</h5> -->
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+					  <div class="modal-body p-2">
+						<div class="container-fluid p-0">
+							<ul>
+								{% for Child in ErrorMessage %}
+									<li>
+										<h6 class="mb-3 text-muted">
+											{{Child}}
+										</h6>
+									</li>
+								{% endfor %}
+							</ul>
+
+						</div>
+					  </div>
+					  <div class="modal-footer p-2 justify-content-between">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script>
+  	{% if ErrorMessage %}
+		$("#modalDone").modal();
+	{% endif %}
+
+	//var close = document.getElementById('close');
+	//var modalDone = document.getElementById('modalDone');
+	//close.onclick = function()
+	//{
+	//	modalDone.style.display = 'none !important'
+	//	modalDone.style.opacity = '0'
+	//}
+  </script>
+</body>
+
+</html>

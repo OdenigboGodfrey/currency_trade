@@ -1,0 +1,42 @@
+{% extends 'CTAdmin/base.html' %}
+{% block title %}
+    CT::Admin::Change Level
+{% endblock %}
+{% block content %}
+  <div class="row pt-1 pb-3 pt-sm-2 pb-sm-4">
+    <div class="col-12 col-lg-6">
+      <div class="card-column">
+        <div class="card tm-shadow-btm">
+          <div class="card-header d-flex flex-wrap flex-md-nowrap justify-content-between align-items-center">
+            Resgister New Admin
+          </div>
+          <div class="card-body">
+            <small class="card-text">Please fill all fields</small>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <form action="" method="post" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group form-row">
+                  <label for="itemName" class="col-12 col-sm-3 col-form-label">Email</label>
+                  <input type="email" placeholder="Enter Email" name="AdminEmail" id="itemName" class="form-control col-12 col-sm-9" required>
+                </div>
+                <div class="form-group form-row">
+                    <label for="itemName" class="col-12 col-sm-3 col-form-label">Select Admin Type</label>
+                    <select name="Star" id="" class="form-control col-12 col-sm-9" required>
+                        <option value="0" selected>Ky-Admin(KYC)</option>
+                        <option value="1">T-Admin(Transaction)</option>
+                        <option value="2">Super Admin</option>
+                    </select>
+                </div>
+                <div class="form-group text-right">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

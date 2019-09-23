@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+	<link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="reg-wrapper" style="height:640px">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-6">
+                <div class="">
+                    <ul class="nav nav-tabs">
+                        <li><a href="{{ Referrer }}"><i class="glyphicon glyphicon-circle-arrow-left"></i></a></li>
+                        <li class="active"><a href="#tab1" data-toggle="tab">Display Picture</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+                            {% if DP %}here
+                                <image src="{{ DP }}" style="width:150px; height:150px"/>
+                            {% endif %}
+                            <form action="" enctype="multipart/form-data" method="post">
+                                {% csrf_token %}
+                                Select Picture <input type="file" name="DP">
+                                <button type="submit">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

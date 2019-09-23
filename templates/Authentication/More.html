@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="service_content">
+        <div class="container-fluid">
+            <div class="row">
+                <h3>Transactions</h3>
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Transactions:Place' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">New Trade Ad</h3>
+                            <p>Create a new trade ad.</p>
+                            <span class="lnr lnr-chevron-right"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Transactions:BulkTransactions' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">Bulk Transactions</h3>
+                            <p>Manage Bulk Transactions (Sell next bit etc.).</p>
+                            <span class="lnr lnr-chevron-right"></span>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Transactions:OnGoing' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">Ongoing Transactions</h3>
+                            <p>My transactions which have not been completed.</p>
+                            <span class="lnr lnr-chevron-right"></span>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Transactions:Completed' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">Completed Transactions</h3>
+                            <p>My transactions which have been completed.</p>
+                            <span class="lnr lnr-chevron-right"></span>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Transactions:Rejected' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">Rejected Transactions</h3>
+                            <p>Transactions where my offer was not accepted.</p>
+                            <span class="lnr lnr-chevron-right"></span>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <h3>Profile</h3>
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Profile:index' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">View Profile Infomation</h3>
+                            <p>View my profile information.</p>
+                            <span class="lnr lnr-chevron-right"></span>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Profile:Edit-Profile' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">Edit Profile Infomation</h3>
+                            <p>Edit my profile information.</p>
+                            <span class="lnr lnr-chevron-right"></span>
+                    </div>
+                    </a>
+
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Profile:Bank-Accounts' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">View My Banks</h3>
+                            <p>View my saved banks.</p>
+                            <span class="lnr lnr-chevron-right"></span>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <a href="{% url 'Profile:Bank-Accounts-Add' %}" class="link-btn-override">
+                        <div class="features-box">
+                            <h3 class="features-title">Add a New Bank</h3>
+                            <p>Add a bank to my saved banks.</p>
+                        <span class="lnr lnr-chevron-right"></span>
+                    </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

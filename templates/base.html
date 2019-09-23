@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Copied from http://cryptomarkethtml.bdtask.com/ by Cyotek WebCopy 1.6.0.559, Sunday, April 7, 2019, 8:11:16 AM -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        {% if Title %}
+            <title>{% block title %}{% endblock %}</title>
+        {% else %}
+            <title>CT - Peer to Peer currency exchange platform</title>
+        {% endif %}
+
+        {% load static %}
+        <link rel="shortcut icon" href="{% static 'assets/img/favicon.ico">
+        <!-- Google fonts css -->
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <!-- Global css -->
+        <link href="{% static 'assets/css/bootstrap.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/bootsnav.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/owl.carousel.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/owl.theme.default.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/bootstrap-select.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/flag-icons/css/flag-icon.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/font-awesome/css/font-awesome.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/linearicons.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/animate.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/magnific-popup-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/dataTables.bootstrap.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/responsive.bootstrap.min-1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/amcharts/export-1.css' %}" rel="stylesheet">
+        {% block css %}
+        {% endblock %}
+        </head>
+    <body>
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
+        {% if not NoNav %}
+            <!-- /.End of loader wrapper-->
+            <nav class="navbar navbar-default navbar-fixed navbar-transparent bootsnav">
+                <!-- Start Top Search -->
+                <div class="top-search">
+                    <div class="container">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Search">
+                            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Top Search -->
+                <div class="container">
+                    <!-- Start Atribute Navigation -->
+                    <div class="attr-nav">
+                        <ul>
+                            <!--<li class="nav-language">-->
+                                <!--<select class="selectpicker" data-width="auto">-->
+                                    <!--<option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>-->
+                                    <!--<option data-content='<span class="flag-icon flag-icon-mx"></span> Español'>Español</option>-->
+                                    <!--<option data-content='<span class="flag-icon flag-icon-bd"></span> বাংলা'>বাংলা </option>-->
+                                <!--</select>-->
+                            <!--</li>-->
+                            {% if not UserId %}
+                                <li><a href="{% url 'Authentication:Login' %}" class="btn nav-btn">Login</a></li>
+                                <li><a href="{% url 'Authentication:Signup' %}" class="btn nav-btn btn-orange">Sign Up</a></li>
+                            {% else %}
+                                <li><a href="{% url 'Authentication:Logout' %}" class="btn nav-btn">Log-Out</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!-- End Atribute Navigation -->
+                    <!-- Start Header Navigation -->
+                    <div class="navbar-header">
+
+                        <a class="navbar-brand" href="index-3.htm"><img src="{% static 'assets/img/logo-1.png' %}" class="logo" alt=""></a>
+                    </div>
+                    <!-- End Header Navigation -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-menu">
+                        <ul class="nav navbar-nav" data-in="" data-out="">
+                            <li {%if Home %} class="active" {% endif %}><a href="">Home</a></li>
+                            <li {% if About %} class="active" {% endif %}><a href="{% url 'pages:About' %}">About Us</a></li>
+                            <li {% if Trades %} class="active" {% endif %}><a href="{% url 'Transactions:Trades' %}">Open Offers</a></li>
+                            <li {% if FAQ %} class="active" {% endif %}><a href="{% url 'pages:faq' %}">FAQ</a></li>
+                            <li {% if Contact %} class="active" {% endif %}><a href="{% url 'pages:Contact' %}">Contact Us</a></li>
+                             <!--<li {% if Services %} class="active" {% endif %}><a href="{% url 'pages:Services' %}">Our Services</a></li>-->
+                            {% if UserId %}<li {% if more %} class="active" {% endif %}><a href="{% url 'Authentication:More' %}">More</a></li>{% endif %}
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </nav>
+            <!-- /. End of Navigation -->
+            <section>
+                <div class="side-menu slideinleft" id="new-menu" >
+                        <div class="profile">
+                            <ul>
+                                <li><img src="{% static 'assets/img/avatar.png' %}" class="avatar"></li>
+                                <li>Me: {{ AccountNumber }}</li>
+                                <li>{{ FullName}}</li>
+                                <li>{{ Email }}</li>
+                                <li>My no:{{ PhoneNo }}</li>
+                                <li><a href="{% url 'Profile:Edit-Profile' %}"><input type="button" value="Edit Profile"></a></li>
+                            </ul>
+                        </div>
+                  <ul>
+                     <li><a href="{% url 'pages:About' %}">About Us</a></li>
+                     <li><a href="#">Privacy Policy</a></li>
+                     <li><a href="{% url 'pages:Contact' %}">Contact Us</a></li>
+                      <li><a href="{% url 'pages:Services' %}">Our Services</a></li>
+                     <!--<li><a href="kyc.htm">KYC</a></li>-->
+                  </ul>
+                </div>
+            </section>
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+        {% if not NoNav %}
+            <!-- /.End of pricing -->
+            <footer class="footer">
+                <div class="footer-breadcrumbs">
+                    <div class="container">
+                        <div class="breadcrumbs-row">
+                            <ul class="f_breadcrumbs">
+                                <li><a href="#"><span>Home</span></a></li>
+                                <!--<li><a href="#"><span>About</span></a></li>-->
+                            </ul>
+                            <div class="scroll-top" id="back-to-top">
+                                <div class="scroll-top-text"><span>Scroll to Top</span></div>
+                                <div class="scroll-top-icon"><i class="fa fa-angle-up"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.End of breadcrumbs -->
+                {% if not UserId %}
+                    <div class="action_btn_inner">
+                        <a href="{% url 'Authentication:Signup' %}" class="action_btn">
+                            <span class="action_title">Register</span>
+                            <span class="lnr lnr-chevron-right action_icon"></span>
+                            <span class="action_sub_title">Join the new era of fiat exchange</span>
+                        </a>
+                        <a href="{% url 'Authentication:Login' %}" class="action_btn">
+                            <span class="action_title">Sign in</span>
+                            <span class="lnr lnr-chevron-right action_icon"></span>
+                            <span class="action_sub_title">Access the fiat currency experience you deserve</span>
+                        </a>
+                    </div>
+                {% endif %}
+                <!-- /.End of action button -->
+                <div class="main_footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4">
+                                <div class="widget-contact">
+                                    <ul class="list-icon">
+                                        <li><i class="fa fa-map-marker"></i> 130, Old Street
+                                            <br>London</li>
+                                        <li><i class="fa fa-phone"></i>+234 808 568 0969 </li>
+                                        <li><i class="fa fa-envelope"></i>hello@CT.com</li>
+
+                                        <li>
+                                            <br><i class="fa fa-clock-o"></i>Monday - Friday: <strong>08:00 - 22:00</strong>
+                                            <br>Saturday, Sunday: <strong>Closed</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-4 col-md-offset-1">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="footer-box">
+                                            <h3 class="footer-title">Our Company</h3>
+                                            <ul class="footer-list">
+                                                <li><a href="#">Customer support</a></li>
+                                                <li><a href="#">Help center</a></li>
+                                                <li><a href="#">Fees & Limits</a></li>
+                                                <li><a href="#">Referral Program</a></li>
+                                                <li><a href="#">About Us</a></li>
+                                                <li><a href="#">24/7 Support</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="footer-box">
+                                            <h3 class="footer-title">Service</h3>
+                                            <ul class="footer-list">
+                                                <li><a href="{% url 'pages:About' %}">About Us</a></li>
+                                                <!-- <li><a href="service.htm">Service</a></li> -->
+                                                <li><a href="{% url 'Transactions:Trades' %}">Exchange</a></li>
+                                                <li><a href="#">Our Team Member</a></li>
+                                                <li><a href="{% url 'pages:faq' %}">FAQ</a></li>
+                                                <li><a href="{% url 'pages:Contact' %}">Contact us</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <div class="newsletter-box">
+                                    <h3 class="footer-title">Email Newslatter</h3>
+                                    <p>Subscribe to our newsletter!</p>
+                                    <form class='newsletter-form' action="{% url 'pages:newsletter' %}" method='post'><input type='hidden' name='form-name' value='form 4'>
+                                        <input placeholder="Email Address" type="text" name="Email">
+                                        <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                        <div class="envelope">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.End of main footer -->
+                <div class="sub_footer">
+                    <div class="container">
+                        <div class="logos-wrapper">
+                            <div class="logos-row">
+                                <div class="social-content">
+                                    <div class="social-row">
+                                        <div class="social_icon">
+                                            <a href="#" class=""><i class="fa fa-facebook"></i></a>
+                                            <a href="#" class=""><i class="fa fa-twitter"></i></a>
+                                            <a href="#" class=""><i class="fa fa-instagram"></i></a>
+                                            <a href="#" class=""><i class="fa fa-youtube-play"></i></a>
+                                            <a href="#" class=""><i class="fa fa-linkedin"></i></a>
+                                        </div>
+                                        <!--<div class="f-language">-->
+                                            <!--<select class="selectpicker" data-width="fit">-->
+                                                <!--<option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>-->
+                                                <!--<option data-content='<span class="flag-icon flag-icon-mx"></span> Español'>Español</option>-->
+                                                <!--<option data-content='<span class="flag-icon flag-icon-bd"></span> বাংলা'>বাংলা </option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="copyright">
+                                <span>Copyright Â© 2018. All rights reserved</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.End of sub footer -->
+            </footer>
+            <!-- /.End of footer -->
+        {% endif %}
+        <!-- jQuery -->
+        <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/bootsnav.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/owl.carousel.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/wow.min.js' %}"></script>
+        <script src="{% static 'assets/js/parallax-background.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.dataTables.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'assets/js/dataTables.responsive.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/responsive.bootstrap.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.marquee.min.js' %}"></script>
+        <script src="{% static 'assets/js/particles.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.magnific-popup.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap-select.min-1.js' %}"></script>
+        <script src="{% static 'assets/js/app.js' %}"></script>
+        <script src="{% static 'assets/js/custom-1.js' %}"></script>
+
+          <footer class="footer-new">
+			<div class="menu-bar">
+					<ul>
+					<li style="float: left"> <a href="{% url 'pages:index' %}" title="Home"><i class="fa fa-home"></i></a></li>
+					<li style="float: left"> <a href="{% url 'pages:faq' %}" title="FAQ"><i class="fa fa-comments"></i></a> </li>
+					<li style="float: left"> <a href="{% url 'Transactions:Trades' %}" title="Available Trades"><i class="fa fa-shopping-cart"></i></a></li>
+					{% if not UserId %}<li style="float: left"> <a href="{% url 'Authentication:Signup' %}" title="Account"><i class="fa fa-user"></i></a></li>{% endif %}
+				</ul>
+
+			</div>
+			<!-- <button class="bar">  -->
+			<i class="fa fa-bars"  id="menu-btn" onclick="openmenu()"></i>
+			<i class="fa fa-times"  id="close-btn" onclick="closemenu()"></i>
+			<!-- </button> -->
+
+
+          </footer>
+        <script>
+			function openmenu()
+			{
+				document.getElementById("new-menu").style.display="block";
+				document.getElementById("menu-btn").style.display="none";
+				document.getElementById("close-btn").style.display="block";
+			}
+
+			function closemenu()
+			{
+				document.getElementById("new-menu").style.display="none";
+				document.getElementById("menu-btn").style.display="block";
+				document.getElementById("close-btn").style.display="none";
+			}
+		</script>
+    {% if ExtraScript %}
+        <script>
+            (function () {
+                // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+                if (!String.prototype.trim) {
+                    (function () {
+                        // Make sure we trim BOM and NBSP
+                        var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                        String.prototype.trim = function () {
+                            return this.replace(rtrim, '');
+                        };
+                    })();
+                }
+
+                [].slice.call(document.querySelectorAll('input.input__field')).forEach(function (inputEl) {
+                    // in case the input is already filled..
+                    if (inputEl.value.trim() !== '') {
+                        classie.add(inputEl.parentNode, 'input--filled');
+                    }
+
+                    // events:
+                    inputEl.addEventListener('focus', onInputFocus);
+                    inputEl.addEventListener('blur', onInputBlur);
+                });
+
+                function onInputFocus(ev) {
+                    classie.add(ev.target.parentNode, 'input--filled');
+                }
+
+                function onInputBlur(ev) {
+                    if (ev.target.value.trim() === '') {
+                        classie.remove(ev.target.parentNode, 'input--filled');
+                    }
+                }
+            })();
+        </script>
+        <script>
+            $(function () {
+                $('.reg-wrapper').css({'height': ($(document).height()) + 'px'});
+                $(window).resize(function () {
+                    $('.reg-wrapper').css({'height': ($(document).height()) + 'px'});
+                });
+            });
+        </script>
+    {% endif %}
+	</body>
+<!-- Copied from http://cryptomarkethtml.bdtask.com/lending.html by Cyotek WebCopy 1.6.0.559, Sunday, April 7, 2019, 8:11:16 AM -->
+</html>
+{% block ExtraScripts %}{% endblock %}

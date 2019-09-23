@@ -1,0 +1,142 @@
+{% extends 'CTAdmin/base.html' %}
+{% block title %}
+    CT Admin::Eagle Eye
+{% endblock %}
+{% block content %}
+  <div class="row pt-1 pb-3 pt-sm-2 pb-sm-4">
+    <div class="col-12 col-lg-12">
+      <div class="card-column">
+        <div class="card tm-shadow-btm">
+          <div class="card-header d-flex flex-wrap flex-md-nowrap justify-content-between align-items-center">
+            Assign
+          </div>
+          <div class="card-body">
+            <small class="card-text">Please select an Admin</small>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <form action="" method="post" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="form-row">
+                        <label for="itemName" class="col-12 col-sm-3 col-form-label">Type</label>
+                        <select name="type" id="" class="form-control col-12 col-sm-9" required>
+                            <option value="KYC">KYC</option>
+                            <option value="Transaction">Transaction</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-row">
+                    <label for="itemName" class="col-12 col-sm-3 col-form-label">Select An Admin</label>
+                    <select name="Admin" class="form-control col-12 col-sm-9">
+                        <option value="0" selected>----------</option>
+                        {% for Admin in Admins %}
+                            <option value="{{ Admin.pk }}">{{ Admin }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group form-row justify-content-between align-items-center">
+                    OR
+                </div>
+                <div class="form-group form-row">
+                  <label for="itemName" class="col-12 col-sm-3 col-form-label">Email</label>
+                  <input type="email" placeholder="123@abc.xyz" name="Email" id="itemName" class="form-control col-12 col-sm-9">
+                </div>
+
+                <div class="form-group text-right">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-12">
+      <div class="card tm-shadow-btm">
+        <div class="card-header d-flex flex-wrap flex-md-nowrap justify-content-between align-items-center">
+          List of Tasks
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive flex-fill">
+            <table class="table table-hover m-0">
+              <thead class="thead-light">
+                <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Date</th>
+                    {% if TransactionsObject %}
+                        <th scope="col">Info</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">HandledBy</th>
+
+                    {% endif %}
+                    <th scope="col">Last Action</th>
+                    <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if TransactionsObject %}
+                    {% for Child in TransactionsObject %}
+                        <tr>
+                            <td>Trade #{{ Child.Transaction.pk }}</td>
+                            <td>{{ Child.Transaction.TransactionDate }}</td>
+                            <td>
+                                <div>Sold by: {{ Child.Transaction.Seller.AccountNumber }}</div>
+                                <div>{{ Child.Transaction.FromCurrency }}-{{ Child.Transaction.ToCurrency }}</div>
+                            </td>
+                            <td>{{ Child.Transaction.Amount }}</td>
+                            <td>Admin #{{ Child.Transaction.HandledBy.pk }}</td>
+                            <td>
+                                {% if Child.Log.Status %}
+                                    {{ Child.Log.TransactionObject.Log }}
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Action">
+                                  <a class="btn btn-success" href="{% url 'CTAdmin:Transaction' Child.Transaction.pk %}">
+                                    <i class="icon ion-ios-done-all"></i>
+                                    view
+                                  </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                {% if KYCsObject %}
+                    {% for Child in KYCsObject %}
+                        <tr>
+                            <td>{{ Child.KYC.UserId.AccountNumber }}'s KYC</td>
+                            <td>{{ Child.KYC.StartDate }}</td>
+                            <td>{{ Child.Log.LogObject.Log }}</td>
+                            <td>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer pb-0">
+          <nav class="page navigation">
+            <ul class="pagination justify-content-end">
+              <li class="page-item"><a href="#" class="page-link" aria-label="previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a></li>
+              <li class="page-item active"><a href="#" class="page-link">1 <span class="sr-only">(current)</span></a></li>
+              <li class="page-item"><a href="#" class="page-link">2</a></li>
+              <li class="page-item"><a href="#" class="page-link">3</a></li>
+              <li class="page-item"><a href="#" class="page-link" aria-label="next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

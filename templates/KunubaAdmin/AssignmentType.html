@@ -1,0 +1,39 @@
+{% extends 'CTAdmin/base.html' %}
+{% block title %}
+    CT::Admin::Set CT Fee Percentage
+{% endblock %}
+
+{% block content %}
+  <div class="row pt-1 pb-3 pt-sm-2 pb-sm-4">
+    <div class="col-12 col-lg-6">
+      <div class="card-column">
+        <div class="card tm-shadow-btm">
+          <div class="card-header d-flex flex-wrap flex-md-nowrap justify-content-between align-items-center">
+              Assignment Type
+          </div>
+          <div class="card-body">
+            <small class="card-text">Please fill all fields</small>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <form action="" method="post" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group form-row">
+                    <label for="itemName" class="col-12 col-sm-3 col-form-label">Admin</label>
+                    <select name="Type" id="itemName" class="form-control col-12 col-sm-9" required>
+                        {% for Child in Type %}
+                            <option value="{{ Child }}">{{ Child }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group text-right">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

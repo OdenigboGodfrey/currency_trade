@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+	<link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="reg-wrapper" style="height:1024px">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-6">
+                <div class="">
+                    <ul class="nav nav-tabs">
+                        <li><a href="{{ Referrer }}"><i class="glyphicon glyphicon-circle-arrow-left"></i></a></li>
+                        <li class="active"><a href="#tab1" data-toggle="tab">Edit</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <span class="input">
+                                    <input class="input__field" type="text" name="FullName" id="input-1">
+                                    <label class="input__label" for="input-1">
+                                        <span class="input__label-content" data-content="Full Name">{{ FullName }}</span>
+                                    </label>
+                                </span>
+                                <span class="input">
+                                    <input class="input__field" type="email" name="Email" id="input-2">
+                                    <label class="input__label" for="input-2">
+                                        <span class="input__label-content" data-content="E-MAIL">{{ Email }}</span>
+                                    </label>
+                                </span>
+                                <span class="input">
+                                    <input class="input__field" type="text" name="PhoneNo" id="input-3">
+                                    <label class="input__label" for="input-3">
+                                        <span class="input__label-content" data-content="Phone Number">{{ PhoneNo }}</span>
+                                    </label>
+                                </span>
+                                <span class="input">
+                                    <input class="input__field" type="text" name="State" id="input-4">
+                                    <label class="input__label" for="input-4">
+                                        <span class="input__label-content" data-content="State">{{ State }}</span>
+                                    </label>
+                                </span>
+                                <span class="input">
+                                    <input class="input__field" type="radio" name="Sex" id="input-4" value="Male" {% if Sex == 'Male' %}checked{% endif %} >
+                                    <label class="input__label" for="input-4">
+                                        <span class="input__label-content" data-content="Sex">Male</span>
+                                    </label>
+                                </span>
+                                <span class="input">
+                                    <input class="input__field" type="radio" name="Sex" id="input-9" value="Female"{% if Sex == 'Female' %}checked{% endif %} >
+                                    <label class="input__label" for="input-9">
+                                        <span class="input__label-content" data-content="Sex">Female</span>
+                                    </label>
+                                </span>
+                                <span class="input">
+                                    <input class="input__field" type="date" name="DOB" id="input-5">
+                                </span>
+                                <span class="input">
+                                    <input class="input__field" type="text" name="Country" id="input-6">
+                                    <label class="input__label" for="input-6">
+                                        <span class="input__label-content" data-content="Country">{{ Country }}</span>
+                                    </label>
+                                </span>
+                                <button type="submit" class="btn btn-reg">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

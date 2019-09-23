@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block css %}
+    {% load static %}
+	<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+        <div class="page_header" data-parallax-bg-image="{% static 'assets/img/1920x650-2.jpg" data-parallax-direction="">
+            <div class="header-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div class="haeder-text">
+                                <h1>Know Your Customer Verification</h1>
+                                <p> Kindly submit your goverment approved documents
+                                    to be eligible to make use of this platform.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--  /.End of page header -->
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="pricing">
+                    <div class="pricing_item">
+                        <h3 class="pricing_title">Selfie</h3>
+                        <p class="pricing_sentence">Add a picture of you holding your ID card. Make sure it is very visible</p>
+                        <img src="{% static 'assets/img/selfieID.png' %}" alt="">
+                        <input type="file" name="Selfie" required>
+                    </div>
+
+                    <div class="pricing_item">
+                        <h3 class="pricing_title">ID Card (front)</h3>
+                        <p class="pricing_sentence">Add a clear scanned copy of the back of your ID card or passport data page</p>
+                        <img src="{% static 'assets/img/selfieID.png' %}" alt="">
+                        <input type="file" name="FrontId" required>
+                    </div>
+
+                    <div class="pricing_item">
+                        <h3 class="pricing_title">ID Card (back)</h3>
+                        <p class="pricing_sentence">Add a clear scanned copy of the back of your ID card or passport data page</p>
+                        <br>
+                        <img src="{% static 'assets/img/selfieID.png' %}" alt="">
+                        <div><input type="file" name="BackId" required></div>
+                    </div>
+
+                    <div class="pricing_item">
+                        <h3 class="pricing_title">Proof Of Address</h3>
+                        <p class="pricing_sentence">Add a clear scanned copy of the front of your utility or bank statement of account or
+                            any other government issued document showing your address
+                        </p>
+                        <img src="{% static 'assets/img/selfieID.png' %}" alt="">
+                        <input type="file" name="MA_Cert" required>
+                    </div>
+                    {% if AccountType == BusinessAccount.val %}
+                        <div class="pricing_item">
+                            <h3 class="pricing_title">MEMAT</h3>
+                            <p class="pricing_sentence">Add a clear scanned copy of the front of your utility or bank statement of account or
+                                any other government issued document showing your address
+                            </p>
+                            <img src="{% static 'assets/img/selfieID.png' %}" alt="">
+                            <input type="file" name="MEMAT" required>
+                        </div>
+                        <div class="pricing_item">
+                            <h3 class="pricing_title">CAC</h3>
+                            <p class="pricing_sentence">Add a clear scanned copy of the front of your utility or bank statement of account or
+                                any other government issued document showing your address
+                            </p>
+                            <img src="{% static 'assets/img/selfieID.png' %}" alt="">
+                            <input type="file" name="CAC" required>
+                        </div>
+                    {% endif %}
+                    <div class="col-md-6">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-default mr-10">Upload</button>
+                            </div>
+                    </div>
+
+            </div>
+            <!-- /.End of pricing -->
+
+        </form>
+{% endblock %}

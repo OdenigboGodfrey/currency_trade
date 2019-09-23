@@ -1,0 +1,48 @@
+﻿{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="page_header" data-parallax-bg-image="{% static 'assets/img/1920x650-1.jpg' %}" data-parallax-direction="">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="haeder-text">
+                            <h1>About Us</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  /.End of page header -->
+    <div class="about_content">
+        <div class="container">
+            <div class="row about-text justify-content">
+                <div class="col-md-6">
+                    <div class="about-info">
+                        <h2>What is CT?</h2>
+                        <div class="definition">CT is the future of funds transfer between peers.</div>
+                        <p>CT offers a secure, Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Amet assumenda beatae commodi consequuntur eos facere facilis fuga inventore, ipsa ipsam natus, necessitatibus nisi obcaecati odit pariatur quia sequi temporibus vero..</p>
+                        <a href="{% url 'Authentication:Signup' %}" class="btn btn-default mr-20">Try It Now</a>
+                        <!--<a href="#" class="btn btn-default-o mb-10">Our Service</a>-->
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-right">
+                        <img src="{% static 'assets/img/bank_PNG26.png' %}" class="img-responsive" alt="">
+                    </div>
+                    <div class="quote">
+                         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Alias aperiam at atque dignissimos dolorum iure natus nemo, obcaecati perspiciatis provident, rerum soluta veritatis vero. Consectetur iure laudantium nisi temporibus tenetur.
+                        <div class="author-address">CEO and Co-Founder</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

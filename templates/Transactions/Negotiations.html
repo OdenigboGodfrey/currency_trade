@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+	<link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+{% if NegotiationsObject%}
+    <div class="buySell_content">
+        <div class="haeder-text" style="text-align:center; padding-bottom: 50px;"><h1>Interested Offers</h1></div>
+        <div class="row">
+            <div class="col-sm-offset-4 col-sm-8">
+                <a href="{% url 'Transactions:NLog' AdId %}"><button class="btn btn-primary">View Log</button></a>
+
+                {% if SellerApproved or BuyerApproved%}
+                    {% if not IsAdmin %}
+                        <a href="{% url 'Transactions:PlaceReview' AdId %}"><button class="btn btn-primary">Leave review</button></a>
+                    {% endif %}
+                {% endif %}
+
+                {% if SellerApproved or BuyerApproved%}
+                <!-- incomplete -->
+                    {% if not IsAdmin %}
+                        <a href="{% url 'Transactions:PlaceReview' AdId %}"><button class="btn btn-primary">Read review</button></a>
+                    {% endif %}
+                {% endif %}
+
+                <!-- show the admin the approve buttons -->
+                {% if Seller != 'n/a' and IsAdmin and not SellerApproved %}
+                    <a href="{% url 'CTAdmin:Approve' AdId %}?Seller={{Seller.Seller.pk}}"><button class="btn btn-primary">Approve {{ Seller.Seller.AccountNumber }}</button></a>
+                {% endif %}
+
+                {% if Buyer != 'n/a' and IsAdmin and not BuyerApproved %}
+                    <a href="{% url 'CTAdmin:Approve' AdId %}?Buyer={{Buyer.UserId.pk}}"><button class="btn btn-primary">Approve {{ Buyer.UserId.AccountNumber }}</button></a>
+                {% endif %}
+
+                <!-- show the admin the buttons to save payment made from the company to client -->
+                {% if Seller != 'n/a' and IsAdmin and SellerApproved and not SellerPaid %}
+                    <a href="{% url 'CTAdmin:Paid' AdId %}?UserId={{Seller.Seller.pk}}"><button class="btn btn-primary">Paid {{ Seller.Seller.AccountNumber }}</button></a>
+                {% endif %}
+
+                {% if Buyer != 'n/a' and IsAdmin and BuyerApproved and not BuyerPaid %}
+                    <a href="{% url 'CTAdmin:Paid' AdId %}?UserId={{Buyer.UserId.pk}}"><button class="btn btn-primary">Paid {{ Buyer.UserId.AccountNumber }}</button></a>
+                {% endif %}
+
+                <!-- show the Seller and admin the close transaction button -->
+                {% if UserId == TransactionObject.Seller.pk and not IsAdmin %}
+                    <a href="{% url 'Transactions:Close' AdId %}"><button class="btn btn-danger">Close Transaction</button></a>
+                {% endif %}
+
+                {% if IsAdmin %}
+                    <a href="{% url 'CTAdmin:Close' AdId %}"><button class="btn btn-danger">Close Transaction</button></a>
+                {% endif %}
+
+                <!-- show the user the view admin's proof of payment -->
+                {% if SellerPaid and UserId == TransactionObject.Seller.pk and not IsAdmin %}
+                    <a href="{{ S_FileName }}"><button class="btn btn-danger">View Proof of Payment</button></a>
+                {% endif %}
+                {% if BuyerPaid and UserId != TransactionObject.Seller.pk and not IsAdmin %}
+                    <a href="{{ B_FileName }}"><button class="btn btn-danger">View Proof of Payment</button></a>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8">
+                    <div class="haeder-text" style="text-align:center; padding-bottom: 50px;"><h4>Trade Information</h4></div>
+                    <table class="table table-striped table-hover nowrap">
+                        <thead>
+                            <tr>
+                                <th>Account Number</th>
+                                <th>Amount</th>
+                                <th>Exchange Rate</th>
+                                <th>Base Currency</th>
+                                <th>Exchange to</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="logo-name">
+                                        <div class="item-logo">
+                                            <img src="{% static 'assets/img/coin-logo/dollar.svg' %}" class="img-responsive" alt="">
+                                        </div>
+                                        <span class="item_name_value">{{ TransactionObject.Seller.AccountNumber }}</span>
+                                    </div>
+                                </td>
+                                <td><span class="value_ticker">{{ TransactionObject.Amount }}</span></td>
+                                <td><span class="value_price">{{ TransactionObject.ExchangeRate }}</span></td>
+                                <td><span class="value_cap">{{ TransactionObject.FromCurrency }}</span></td>
+                                <td><span class="value_max_quantity">{{ TransactionObject.ToCurrency }}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8">
+                    <div class="haeder-text" style="text-align:center; padding-bottom: 50px;"><h4>Offers</h4></div>
+                    <table id="stocksTable" class="table table-striped table-hover nowrap">
+                        <thead>
+                            <tr>
+                                <th>Account Number</th>
+                                <th>Message</th>
+                                <th>Proposed Rate</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for Negotiation in NegotiationsObject %}
+                                <tr>
+                                    <td>
+                                        {{ Negotiation.UserObject.AccountNumber }}
+                                    </td>
+                                    <td><span class="value_ticker">{{ Negotiation.NegotiationObject.Message }}</span></td>
+                                    <td>
+                                        <span class="value_price">
+                                            {% if Negotiation.NegotiationObject.Negotiable %}
+                                                {{ TransactionObject.ExchangeRate }}
+                                            {%else%}
+                                                n/a
+                                            {% endif %}
+
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="value_cap">
+                                            {% if Negotiation.NegotiationObject.Negotiable %}
+                                                {{ Negotiation.NegotiationObject.ExchangeRate }}
+                                            {% else %}
+                                                n/a
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="value_max_quantity">
+                                            {% if not IsAdmin and TransactionObject.Seller.pk == UserId and not BuyerApproved %}
+                                                {% if not Negotiation.NegotiationObject.Accepted%}
+                                                    <a href="{% url 'Transactions:Negotiations' AdId %}?Accept&N={{ Negotiation.NegotiationObject.pk }}">Accept</a>
+                                                {% elif Negotiation.NegotiationObject.Accepted %}
+                                                    (Accepted)
+                                                {% endif %}
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="value_max_quantity">
+                                            {% if not IsAdmin and TransactionObject.Seller.pk == UserId and not BuyerApproved %}
+                                                <a href="{% url 'Transactions:Negotiations' AdId %}?Decline&N={{ Negotiation.NegotiationObject.pk }}">Decline</a>
+                                            {% endif %}
+                                        </span>
+
+                                    </td>
+                                </tr>
+                            {% endfor%}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="buySell_content">
+        <div class="haeder-text" style="text-align:center; padding-bottom: 50px;"><h1>Interested Offers</h1></div>
+        <div class="row">
+            <div class="col-sm-offset-4 col-sm-8">
+                No interested offers yet.
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

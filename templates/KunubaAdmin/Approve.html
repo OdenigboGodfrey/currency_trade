@@ -1,0 +1,83 @@
+{% extends 'CTAdmin/base.html' %}
+{% block title %}
+    CT Admin::Approve
+{% endblock %}
+{% block content %}
+    {%if Files %}
+        {% for File in Files%}
+            {%if File.Status%}
+                <div class="col-12 col-md-4">
+                    <div class="card tm-shadow-btm mt-3 mt-md-0">
+                        <div class="card-header d-flex flex-wrap flex-md-nowrap justify-content-between align-items-center">
+                          File {{ File.index }}
+                        </div>
+                        <img src="{{ File.FileName }}" alt="Our office" class="card-image-top img-fluid">
+                    </div>
+                </div>
+            {% endif %}
+            <br>
+        {% endfor %}
+    {% else %}
+        No File uploaded yet.
+    {% endif %}
+    <div class="row pt-1 pb-3 pt-sm-2 pb-sm-4">
+        <div class="col-12 col-lg-6">
+          <div class="card-column">
+            <div class="card tm-shadow-btm">
+              <div class="card-header d-flex flex-wrap flex-md-nowrap justify-content-between align-items-center">
+                Handle Proof of Payment
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <form action="{{ URL }}" method="post" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="TransactionAccept" class="col-sm-4 control-label">Accept</label>
+                      <input type="radio"  name="Action" value="True" id="TransactionAccept" checked  class="form-control input-solid" required>
+                    </div>
+                    <div class="form-group form-row">
+                        <label for="TransactionReject" class="col-sm-4 control-label">Decline</label>
+                        <input type="radio"  name="Action" value="False" id="TransactionReject" class="form-control input-solid">
+                    </div>
+                    <div class="form-group">
+                        <label for="RejectionMessage" class="col-12 col-sm-3 col-form-label">Reason</label>
+                        <textarea name="RejectionMessage" id="RejectionMessage" class="form-control input-solid" cols="20" rows="5" disabled></textarea>
+                    </div>
+                    <div class="form-group text-right">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script>
+    var TransactionAccept = document.getElementById('TransactionAccept');
+    var TransactionReject = document.getElementById('TransactionReject');
+
+    TransactionAccept.onchange = function()
+    {
+        if (TransactionAccept.checked)
+        {
+            var att = document.createAttribute("disabled");
+            att.value = "disabled";
+            document.getElementById('RejectionMessage').setAttributeNode(att);
+
+            att = document.createAttribute("required");
+            att.value = "required";
+            document.getElementById('RejectionMessage').setAttributeNode(att);
+        }
+    }
+
+    TransactionReject.onchange = function()
+    {
+        if(TransactionReject.checked)
+        {
+            document.getElementById('RejectionMessage').removeAttribute('disabled')
+            document.getElementById('RejectionMessage').removeAttribute('required')
+        }
+    }
+    </script>
+{% endblock %}

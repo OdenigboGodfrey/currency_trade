@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+	<link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="reg-wrapper" style="height:1024px">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-6">
+                <div class="">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">Log In</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <span class="input">
+                                    <input class="input__field" type="text" name="email" placeholder="Email" id="input-2">
+                                </span>
+
+                                <span class="input">
+                                    <input class="input__field" type="password" name="password" id="input-3" placeholder="Enter Password">
+                                </span>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Don't have an account? <a href="#" class="checkbox-link">Sign up</a> Now
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-reg">Log in</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

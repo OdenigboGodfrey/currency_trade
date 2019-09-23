@@ -1,0 +1,428 @@
+﻿{% extends 'base.html' %}
+{% block css %}
+	{% load static %}
+	<link href="{% static 'assets/css/style-1.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="animation-slide owl-carousel owl-theme" id="animation-slide">
+    <!-- Slide 1-->
+    <div class="item slide-one">
+        <div class="slide-table">
+            <div class="slide-tablecell">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="slide-text text-center">
+                                <h2><span class="outrageous-orange">Fintech</span> applied to currency exchange like never before  </h2>
+                                <p>
+                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates
+                                </p>
+                                <div class="slide-buttons">
+                                    <a href="{% url 'Authentication:Signup' %}" class="slide-btn">Get in touch</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Slide 2-->
+    <div class="item slide-two">
+        <div class="slide-table">
+            <div class="slide-tablecell">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="slide-text">
+                                <h2>Currency <span class="bright-turquoise">Exchange</span>  <br>You Can Trust</h2>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</p>
+                                <div class="slide-buttons">
+                                    <a href="{% url 'Authentication:Signup' %}" class="slide-btn">Find Out More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Slide 3-->
+    <div class="item slide-three">
+        <div class="slide-table">
+            <div class="slide-tablecell">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="slide-text text-right">
+                                <h2>Embrace the world’s first peer to peer online <br><span class="navy-blue">Currency</span> exchange.</h2>
+                                <p> Take control, set own rate or accept a rate that suits. Only on CT!</p>
+                                <div class="slide-buttons">
+                                    <a href="#" class="slide-btn">Start Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- /.End of slider -->
+    <div class="ticker">
+    <div class="list-wrpaaer">
+        <ul id="marquee-horizontal">
+            <li class="list-item">
+                <div class="list-item-currency">EURGBP </div>
+                <div class="list-item-currency upgrade">
+                    <span>1,244.26331 <span class="arrow-up">&#8599;</span></span>
+                </div>
+            </li>
+            <li class="list-item">
+                <div class="list-item-currency">GBPNGN</div>
+                <div class="list-item-currency downgrade">
+                    <span>7,088.48 <span class="arrow-down">&#8600;</span></span>
+                </div>
+            </li>
+            <li class="list-item">
+                <div class="list-item-currency">EURUSD</div>
+                <div class="list-item-currency downgrade">
+                    <span>1,470 <span class="arrow-down">&#8600;</span></span>
+                </div>
+            </li>
+            <li class="list-item">
+                <div class="list-item-currency">EURNGN</div>
+                <div class="list-item-currency downgrade">
+                    <span>8,444.84879 <span class="arrow-down">&#8600;</span></span>
+                </div>
+            </li>
+            <li class="list-item">
+                <div class="list-item-currency">GBPNGN</div>
+                <div class="list-item-currency downgrade">
+                    <span>7,088.48 <span class="arrow-down">&#8600;</span></span>
+                </div>
+            </li>
+            <li class="list-item">
+                <div class="list-item-currency">NGNKSH</div>
+                <div class="list-item-currency upgrade">
+                    <span>614,411.15205 <span class="arrow-up">&#8599;</span></span>
+                </div>
+            </li>
+            <li class="list-item">
+                <div class="list-item-currency">USDJPY</div>
+                <div class="list-item-currency downgrade">
+                    <span>10,487.9123 <span class="arrow-down">&#8600;</span></span>
+                </div>
+            </li>
+            <li class="list-item">
+                <div class="list-item-currency">EURCHF</div>
+                <div class="list-item-currency downgrade">
+                    <span>0.013 <span class="arrow-down">&#8600;</span></span>
+                </div>
+            </li>
+            <li class="list-item">
+                <div class="list-item-currency">CHFNGN</div>
+                <div class="list-item-currency upgrade">
+                    <span>118.91234 <span class="arrow-up">&#8599;</span></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <!-- /.End of tricker -->
+
+    <!-- /.End of about content -->
+    <div class="calculate">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="section_title">
+                    <h3>Quick Currency <span>Converter</span></h3>
+                    <p>Check quickly the currency conversion rate at market price</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content">
+            <div class="col-sm-4">
+                <div class="bitcoin-sack">
+                    <img src="{% static 'assets/img/calculate-img-1.png' %}" class="img-responsive center-block" alt="">
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="exchange-content">
+                    <form class="form-inline exchange-form" action="">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <select class="selectpicker" data-width="100%" name="FromCurrency" id="fromcurrency" required>
+                                    {% for Currency in Currencies %}
+                                        <option value="{{ Currency.Cur }}" {% if FromSelectedItem and FromSelectedItem ==  Currency.Cur %} selected {% endif %}>
+                                            {{ Currency.Name }}({{ Currency.Cur }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input type="text" class="form-control" id="FromAmount">
+                        </div>
+                        <div class="exchange-btn">
+                            <span class="lnr lnr-arrow-right"></span>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <select class="selectpicker" data-width="100%" name="ToCurrency" id="tocurrency" required>
+                                    {% for Currency in Currencies %}
+                                        <option value="{{ Currency.Cur }}" {% if ToSelectedItem and ToSelectedItem ==  Currency.Cur %} selected {% endif %}>
+                                            {{ Currency.Name }}({{ Currency.Cur }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input type="text" class="form-control" id="ToAmount">
+                        </div>
+                    </form>
+                    <div class="exchange-info">
+                        <h4>How it works?</h4>
+                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- /.End of calculate -->
+    <div class="features__content">
+    <div id="content__bg"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="section_title">
+                    <h3>Services we <span>Provide</span></h3>
+                    <p>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-6">
+            <div class="feature__box">
+                <i class="flaticon-analytics"></i>
+                <div class="feature__content">
+                    <h3>Escrow Service</h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-6">
+            <div class="feature__box">
+                <i class="flaticon-secure-shield"></i>
+                <div class="feature__content">
+                    <h3>Prepaid Visa Card</h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-6">
+            <div class="feature__box">
+                <i class="flaticon-people"></i>
+                <div class="feature__content">
+                    <h3>Support 24/7</h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</p>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-sm-4 col-md-3">
+            <div class="feature__box">
+                <i class="flaticon-credit-card"></i>
+                <div class="feature__content">
+                    <h3>Payment Methods</h3>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+                        its layout.</p>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="col-sm-4 col-md-3">
+            <div class="feature__box">
+                <i class="flaticon-money-2"></i>
+                <div class="feature__content">
+                    <h3>Registered Company</h3>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+                        its layout.</p>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="col-sm-4 col-md-3">
+            <div class="feature__box">
+                <i class="flaticon-money-1"></i>
+                <div class="feature__content">
+                    <h3>Secured Company</h3>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+                        its layout.</p>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-sm-4 col-md-6">
+            <div class="feature__box">
+                <i class="flaticon-bitcoin"></i>
+                <div class="feature__content">
+                    <h3>Live Exchange Rates</h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</p>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-sm-4 col-md-3">
+            <div class="feature__box">
+                <i class="flaticon-bitcoin-1"></i>
+                <div class="feature__content">
+                    <h3>Cryptocurrency Investments</h3>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+                        its layout.</p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    </div>
+    <!-- End of features content -->
+    <div class="crypto-strat">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="section_title">
+                    <h3>How to Get  <span>Started</span></h3>
+                    <p>It is very easy to use. Just follow the simple steps below.</p>
+                </div>
+            </div>
+        </div>
+        <!--<div class="crypto-strat-title"><span>How to Get Start</span></div>-->
+        <div class="start-steps">
+            <div class="start-step">
+                <!--<span class="start-step-number">1</span>-->
+                <i class="step-icon flaticon-wallet"></i>
+                <div class="start-step-info">
+                    <div class="step-name">
+                        <span>Registration</span>
+                    </div>
+                    <div class="step-text">
+                        <span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</span>
+                    </div>
+                </div>
+            </div>
+            <div class="start-step">
+                <!--<span class="start-step-number">2</span>-->
+                <i class="step-icon flaticon-credit-card"></i>
+                <div class="start-step-info">
+                    <div class="step-name">
+                        <span>KYC Verification</span>
+                    </div>
+                    <div class="step-text">
+                        <span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</span>
+                    </div>
+                </div>
+            </div>
+            <div class="start-step">
+                <!--<span class="start-step-number">3</span>-->
+                <i class="step-icon flaticon-money-1"></i>
+                <div class="start-step-info">
+                    <div class="step-name">
+                        <span>Buy or Sell Orders</span>
+                    </div>
+                    <div class="step-text">
+                        <span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta doloribus eligendi in incidunt magni molestiae officia,
+                                    pariatur porro sit voluptatum. Ad adipisci esse itaque necessitatibus quis sapiente, sunt ullam voluptates</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'Authentication:Signup' %}" class="btn btn-default">Get Started</a>
+    </div>
+    </div>
+    <!-- /.End of How to Get  Start -->
+    <div class="currency-table">
+    <div class="with-nav-tabs currency-tabs">
+        <div class="tab-header">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#forex" data-toggle="tab">Buy</a></li>
+            </ul>
+        </div>
+        <div class="container">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="forex">
+                <table id="forexTable" class="table table-striped table-hover nowrap">
+                    <thead>
+                        <tr>
+                            <th>Account Number</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Rate</th>
+                            <th>Offer currency</th>
+                            <th>Bid currency</th>
+                            <th>Negotiable</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for Transaction in TransactionsObject %}
+                            <tr>
+                                <td>
+                                    <span class="item_name_value">{{ Transaction.Seller.AccountNumber }}</span>
+                                </td>
+                                <td><span class="value_ticker">{{ Transaction.Amount }}</span></td>
+                                <td><span class="value_ticker">{{ Transaction.TransactionDate }}</span></td>
+                                <td><span class="value_price">{{ Transaction.ExchangeRate }}</span></td>
+                                <td><span class="value_cap">{{ Transaction.FromCurrency }}</span></td>
+                                <td><span class="value_max_quantity">{{ Transaction.ToCurrency }}</span></td>
+                                <td><span class="value_max_quantity">{% if Transaction.Negotiable %} Yes {% else %} No {% endif %}</span></td>
+                                <td><a href="{% url 'Transactions:BuyAd' Transaction.pk  %}?sid={{ Transaction.Seller.id }}" style="text-decoration:underline">Buy</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<script>
+    var fromcurrency = document.getElementById('fromcurrency')
+    var tocurrency = document.getElementById('tocurrency')
+    var FromAmount = document.getElementById('FromAmount')
+    var ToAmount = document.getElementById('ToAmount')
+    var ExchangeRate = 0
+
+    {% if Rate %}
+        ExchangeRate = {{Rate}}
+    {% endif %}
+
+    tocurrency.onchange = function()
+    {
+         SelectChanged ()
+    }
+
+    fromcurrency.onchange = function()
+    {
+         SelectChanged ()
+    }
+
+    function SelectChanged ()
+    {
+        window.location.href = location.protocol + '//' + location.host + location.pathname + "?from=" + fromcurrency.options[fromcurrency.selectedIndex].value + "&to=" + tocurrency.options[tocurrency.selectedIndex].value
+    }
+
+    FromAmount.onkeyup = function()
+    {
+        console.log(ExchangeRate)
+        ToAmount.value = (FromAmount.value * ExchangeRate)
+    }
+
+    ToAmount.onkeyup = function()
+    {
+        FromAmount.value = (ToAmount.value / ExchangeRate)
+    }
+
+</script>
+{% endblock %}

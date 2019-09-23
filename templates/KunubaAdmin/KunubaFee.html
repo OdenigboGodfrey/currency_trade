@@ -1,0 +1,54 @@
+{% extends 'CTAdmin/base.html' %}
+{% block title %}
+    CT::Admin::Set CT Fee Percentage
+{% endblock %}
+
+{% block content %}
+  <div class="row pt-1 pb-3 pt-sm-2 pb-sm-4">
+    <div class="col-12 col-lg-6">
+      <div class="card-column">
+        <div class="card tm-shadow-btm">
+          <div class="card-header d-flex flex-wrap flex-md-nowrap justify-content-between align-items-center">
+            CT Fee
+          </div>
+          <div class="card-body">
+            <small class="card-text">Please fill all fields</small>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <form action="" method="post" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group form-row">
+                  <label for="itemName" class="col-12 col-sm-3 col-form-label">Fee (%)</label>
+                  <input type="text" placeholder="Enter CT Fee Percentage" name="Percentage" id="itemName" class="form-control col-12 col-sm-9" required>
+                </div>
+                <div class="form-group text-right">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% if CTFeeObject %}
+    <!-- Modal with message -->
+    <div class="modal fade" id="modalDone" tabindex="-1" role="dialog" aria-labelledby="modalDone" aria-hidden="false" style="display:block !important; opacity:1;top:140px">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-2">
+                <!-- <h5 class="modal-title text-center">Appointment Request</h5> -->
+                <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="icon ion-ios-cancel"></i>CTFee: {{ CTFeeObject.Percentage}} was set on {{ CTFeeObject.SetDate }}</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+{% endif %}
