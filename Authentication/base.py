@@ -237,8 +237,8 @@ class Utilities:
             return False
 
     def send_sms(self, phone, message):
-        account_sid = 'AC12b068ccfbadde1d5d87001eea307a93'
-        auth_token = 'dded41669b0640233c2e26d786993752'
+        account_sid = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        auth_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
         client = Client(account_sid, auth_token)
         #         currency_trade
         sender = '447480780189'
