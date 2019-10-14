@@ -241,7 +241,7 @@ class Utilities:
         auth_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
         client = Client(account_sid, auth_token)
         #         currency_trade
-        sender = '447480780189'
+        sender = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
         try:
             Rr = client.messages.create(from_=sender, body=message, to=phone, provide_feedback=False)
             aa = Rr
